@@ -18,6 +18,7 @@
 
 enum layers {
     BASE,
+    WORKGIRL,
     CALC,
     LOREM,
     PIRO,
@@ -41,11 +42,17 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [BASE] = LAYOUT_ansi_61(
-        KC_ESC,  KC_1,     KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,
-        KC_TAB,  KC_Q,     KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,
-        KC_CAPS, KC_A,     KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,            KC_ENT,
+        KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,
+        KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,
+        KC_LALT,   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,            KC_ENT,
         SHIFT_TAP, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,   KC_SLSH,     SHIFT_TAP,
-        KC_LCTL, PIRO_SWITCH,  FN_SWITCH,                            KC_SPC,                             WINALT_COMBO,  FN_SWITCH, PIRO_SWITCH, KC_RCTL),
+        KC_LCTL, PIRO_SWITCH,  FN_SWITCH,                            KC_SPC,                             KC_LWIN,  FN_SWITCH, PIRO_SWITCH, KC_RCTL),
+    [WORKGIRL] = LAYOUT_ansi_61(
+        _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,     KC_0,    KC_MINS,  KC_EQL,   KC_BSPC,
+        _______, KC_Q,    KC_D,    KC_R,    KC_W,    KC_B,    KC_J,    KC_F,    KC_U,    KC_P,     KC_SCLN, KC_LBRC,  KC_RBRC,  KC_BSLS,
+        _______, KC_A,    KC_S,    KC_H,    KC_T,    KC_G,    KC_X,    KC_N,    KC_E,    KC_O,     KC_I,    KC_QUOT,            KC_ENT,
+        _______, KC_Z,    KC_Y,    KC_M,    KC_C,    KC_V,    KC_K,    KC_L,    KC_COMM, KC_DOT,   KC_SLSH,     SHIFT_TAP,
+        _______, PIRO_SWITCH,  FN_SWITCH,                            _______,                             _______,  FN_SWITCH, PIRO_SWITCH, _______),
     [CALC] = LAYOUT_ansi_61(
         KC_ESC,  KC_P7,   KC_P8, KC_P9,   KC_PAST,  KC_BSPC, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,  XXXXXXX, KC_BSPC,   
         KC_PMNS, KC_P4,   KC_P5, KC_P6,   KC_PSLS,  XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,  XXXXXXX, XXXXXXX,  
@@ -79,15 +86,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SUPERFN] = LAYOUT_ansi_61(   
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,     _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,     _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, LOREM_IPSUM, _______, _______,          _______,
+        KC_CAPS, _______, _______, _______, _______, _______, _______, _______, _______, LOREM_IPSUM, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,     _______,                   _______,
         _______, _______, _______,                    _______,                           _______,     _______,          _______, _______),
     [ACCESS] = LAYOUT_ansi_61(
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TO(LOREM), XXXXXXX, XXXXXXX,          XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, TO(CALC), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,                   XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX,                           TO(BASE),                    XXXXXXX,   XXXXXXX,          XXXXXXX, XXXXXXX)
+        XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, TO(WORKGIRL), XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TO(LOREM), XXXXXXX, XXXXXXX,          XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX,      TO(CALC), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,                   XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX,                                TO(BASE),                    XXXXXXX,   XXXXXXX,          XXXXXXX, XXXXXXX)
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
