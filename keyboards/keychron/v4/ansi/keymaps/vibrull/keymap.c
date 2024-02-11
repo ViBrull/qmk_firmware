@@ -20,6 +20,7 @@ enum layers {
     BASE,
     WORKGIRL,
     CALC,
+    ALTCODE,
     LOREM,
     PIRO,
     SUPERPIRO,
@@ -36,7 +37,10 @@ enum custom_keycodes {
     DELETE_NEXT_WORD,
     DELETE_CURRENT_WORD,
     LOREM_IPSUM,
-    LOREM_IPSUM_CHARACTER
+    LOREM_IPSUM_CHARACTER,
+    ALT_SEC,
+    ALT_MD,
+    ALT_ND,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -58,6 +62,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_PMNS, KC_P4,   KC_P5, KC_P6,   KC_PSLS,  XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,  XXXXXXX, XXXXXXX,  
         KC_PENT, KC_P1,   KC_P2, KC_P3,   XXXXXXX,  XXXXXXX, XXXXXXX,     KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,   XXXXXXX,          KC_ENT,
         KC_PPLS, KC_PDOT, KC_P0, XXXXXXX, XXXXXXX,  XXXXXXX, KC_NUM_LOCK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,
+        _______, PIRO_SWITCH,  FN_SWITCH,                            _______,           _______,     FN_SWITCH, PIRO_SWITCH,       _______),
+    [ALTCODE] = LAYOUT_ansi_61(
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC,   
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  
+        _______, XXXXXXX, ALT_SEC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_ENT,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, ALT_ND,  ALT_MD,  XXXXXXX, XXXXXXX, XXXXXXX,                   _______,
         _______, PIRO_SWITCH,  FN_SWITCH,                            _______,           _______,     FN_SWITCH, PIRO_SWITCH,       _______),
     [LOREM] = LAYOUT_ansi_61(
         _______, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, _______,
@@ -92,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [ACCESS] = LAYOUT_ansi_61(
         XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, TO(WORKGIRL), XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TO(LOREM), XXXXXXX, XXXXXXX,          XXXXXXX,
+        XXXXXXX, TO(ALTCODE), XXXXXXX,      XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TO(LOREM), XXXXXXX, XXXXXXX,          XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX,      TO(CALC), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,                   XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX,                                TO(BASE),                    XXXXXXX,   XXXXXXX,          XXXXXXX, XXXXXXX)
 };
@@ -112,6 +122,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static char lorem_ipsum_string[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n";
     static uint16_t lorem_ipsum_length = sizeof(lorem_ipsum_string)/sizeof(lorem_ipsum_string[0]);
     static char lorem_ipsum_current[] = {'L', '\0'};
+
     switch (keycode) {
         case FN_SWITCH:
             if (record->event.pressed) {
@@ -291,6 +302,51 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 lorem_ipsum_timer = timer_read();
             }
             return false; // We handled this keypress
+
+        case ALT_MD:
+            if (record->event.pressed) {
+                register_code(KC_LALT);
+                register_code(KC_P0);
+                unregister_code(KC_P0);
+                register_code(KC_P1);
+                unregister_code(KC_P1);
+                register_code(KC_P5);
+                unregister_code(KC_P5);
+                register_code(KC_P1);
+                unregister_code(KC_P1);
+                unregister_code(KC_LALT);
+            }
+            return false;
+
+        case ALT_ND:
+            if (record->event.pressed) {
+                register_code(KC_LALT);
+                register_code(KC_P0);
+                unregister_code(KC_P0);
+                register_code(KC_P1);
+                unregister_code(KC_P1);
+                register_code(KC_P5);
+                unregister_code(KC_P5);
+                register_code(KC_P0);
+                unregister_code(KC_P0);
+                unregister_code(KC_LALT);
+            }
+            return false;
+
+        case ALT_SEC:
+            if (record->event.pressed) {
+                register_code(KC_LALT);
+                register_code(KC_P0);
+                unregister_code(KC_P0);
+                register_code(KC_P1);
+                unregister_code(KC_P1);
+                register_code(KC_P6);
+                unregister_code(KC_P6);
+                register_code(KC_P7);
+                unregister_code(KC_P7);
+                unregister_code(KC_LALT);
+            }
+            return false;
 
     }
 
