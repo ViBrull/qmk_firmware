@@ -20,10 +20,10 @@ enum layers {
     BASE,
     WORKGIRL,
     CALC,
-    ALTCODE,
     LOREM,
     PIRO,
     SUPERPIRO,
+    ALTCODE,
     FN,
     SUPERFN,
     ACCESS
@@ -41,6 +41,7 @@ enum custom_keycodes {
     ALT_SEC,
     ALT_MD,
     ALT_ND,
+    ALT_THR,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -63,12 +64,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_PENT, KC_P1,   KC_P2, KC_P3,   XXXXXXX,  XXXXXXX, XXXXXXX,     KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,   XXXXXXX,          KC_ENT,
         KC_PPLS, KC_PDOT, KC_P0, XXXXXXX, XXXXXXX,  XXXXXXX, KC_NUM_LOCK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,
         _______, PIRO_SWITCH,  FN_SWITCH,                            _______,           _______,     FN_SWITCH, PIRO_SWITCH,       _______),
-    [ALTCODE] = LAYOUT_ansi_61(
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC,   
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  
-        _______, XXXXXXX, ALT_SEC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_ENT,
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, ALT_ND,  ALT_MD,  XXXXXXX, XXXXXXX, XXXXXXX,                   _______,
-        _______, PIRO_SWITCH,  FN_SWITCH,                            _______,           _______,     FN_SWITCH, PIRO_SWITCH,       _______),
     [LOREM] = LAYOUT_ansi_61(
         _______, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, _______,
         _______, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, LOREM_IPSUM_CHARACTER, _______,
@@ -80,13 +75,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         G(KC_TAB), RAG(KC_Q), RAG(KC_W),    RAG(KC_E),    RAG(KC_R),    RAG(KC_T),    RAG(KC_Y),    RAG(KC_U),    RAG(KC_I),    RAG(KC_O),    RAG(KC_P),     RAG(KC_LBRC),  RAG(KC_RBRC),  RAG(KC_BSLS),
         _______,   RAG(KC_A), RAG(KC_S),    RAG(KC_D),    RAG(KC_F),    RAG(KC_G),    RAG(KC_H),    RAG(KC_J),    RAG(KC_K),    RAG(KC_L),    RAG(KC_SCLN),  RAG(KC_QUOT),                 _______,
         _______,   RAG(KC_Z), RAG(KC_X),    RAG(KC_C),    RAG(KC_V),    RAG(KC_B),    RAG(KC_N),    RAG(KC_M),    RAG(KC_COMM), RAG(KC_DOT),  RAG(KC_SLSH),                                _______,
-        _______,   _______,  _______,                            MO(SUPERPIRO),                                   _______,      _______,                     _______,                      _______),
+        _______,   _______,  _______,                            MO(ALTCODE),                                   _______,      _______,                     _______,                      _______),
     [SUPERPIRO] = LAYOUT_ansi_61(
         LCAG(KC_F22), RAG(KC_F1),   RAG(KC_F2),   RAG(KC_F3),   RAG(KC_F4),   RAG(KC_F5),   RAG(KC_F6),   RAG(KC_F7),   RAG(KC_F8),   RAG(KC_F9),   RAG(KC_F10),  RAG(KC_F11), RAG(KC_F12), _______,
         _______,      RAG(KC_F13),  RAG(KC_F14),  RAG(KC_F15),  RAG(KC_F16),  RAG(KC_F17),  RAG(KC_F18),  RAG(KC_F19),  RAG(KC_F20),  RAG(KC_F21),  RAG(KC_F22),  RAG(KC_F23), RAG(KC_F24), _______,
         _______,      LCAG(KC_F1),  LCAG(KC_F2),  LCAG(KC_F3),  LCAG(KC_F4),  LCAG(KC_F5),  LCAG(KC_F6),  LCAG(KC_F7),  LCAG(KC_F8),  LCAG(KC_F9),  LCAG(KC_F10), LCAG(KC_F11),             _______,
         _______,      LCAG(KC_F12), LCAG(KC_F13), LCAG(KC_F14), LCAG(KC_F15), LCAG(KC_F16), LCAG(KC_F17), LCAG(KC_F18), LCAG(KC_F19), LCAG(KC_F20), LCAG(KC_F21), _______,
         _______, _______,  _______,                            _______,                             _______,  _______, _______, _______),
+    [ALTCODE] = LAYOUT_ansi_61(
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC,   
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  
+        _______, XXXXXXX, ALT_SEC, ALT_THR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_ENT,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, ALT_ND,  ALT_MD,  XXXXXXX, XXXXXXX, XXXXXXX,                   _______,
+        _______, PIRO_SWITCH,  FN_SWITCH,                            _______,           _______,     FN_SWITCH, PIRO_SWITCH,       _______),
     [FN] = LAYOUT_ansi_61(
         KC_GRV,    KC_F1,      KC_F2,     KC_F3,   KC_F4,   KC_F5,   KC_F6,               KC_F7,      KC_F8,      KC_F9,      KC_F10,      KC_F11,           KC_F12,    KC_DELETE,
         G(KC_TAB), C(KC_PGUP), KC_MPRV,   KC_MPLY, KC_MNXT, _______, S(KC_DELETE),        KC_HOME,    KC_PGDN,    KC_PGUP,    KC_END,      C(KC_HOME),       C(KC_END), _______,
@@ -348,6 +349,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
 
+        case ALT_THR:
+            if (record->event.pressed) {
+                register_code(KC_LALT);
+                register_code(KC_P0);
+                unregister_code(KC_P0);
+                register_code(KC_P2);
+                unregister_code(KC_P2);
+                register_code(KC_P4);
+                unregister_code(KC_P4);
+                register_code(KC_P0);
+                unregister_code(KC_P0);
+                unregister_code(KC_LALT);
+            }
+            return false;
     }
 
     if (!record->event.pressed && shift_tap_tracker == 2) { // If shift lock was engaged, release shift when the next key is released
