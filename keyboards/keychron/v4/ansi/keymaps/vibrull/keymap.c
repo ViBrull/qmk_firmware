@@ -15,6 +15,7 @@
  */
 
 #include QMK_KEYBOARD_H
+#include <stdarg.h>
 
 enum layers {
     BASE,
@@ -24,6 +25,9 @@ enum layers {
     PIRO,
     SUPERPIRO,
     ALTCODE,
+    ALTCODE2,
+    ALTCODE3,
+    ALTCODE4,
     FN,
     SUPERFN,
     ACCESS
@@ -41,7 +45,22 @@ enum custom_keycodes {
     ALT_SEC,
     ALT_MD,
     ALT_ND,
-    ALT_THR,
+    ALT_ETH,
+    ALT_BUL,
+    ALT_BBL,
+    ALT_CPR,
+    ALT_TMK,
+    ALT_RTM,
+    ALT_LARROW,
+    ALT_UARROW,
+    ALT_RARROW,
+    ALT_DARROW,
+    ALT_GRAVE,
+    ALT_ACUTE,
+    ALT_DIAERESIS,
+    ALT_MACRON,
+    ALT_LEQ,
+    ALT_GEQ
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -83,11 +102,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,      LCAG(KC_F12), LCAG(KC_F13), LCAG(KC_F14), LCAG(KC_F15), LCAG(KC_F16), LCAG(KC_F17), LCAG(KC_F18), LCAG(KC_F19), LCAG(KC_F20), LCAG(KC_F21), _______,
         _______, _______,  _______,                            _______,                             _______,  _______, _______, _______),
     [ALTCODE] = LAYOUT_ansi_61(
+        _______,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, ALT_LEQ, ALT_GEQ, KC_BSPC,   
+        _______,      XXXXXXX, XXXXXXX, XXXXXXX, ALT_RTM, ALT_TMK, XXXXXXX, ALT_DIAERESIS, ALT_GRAVE, ALT_ACUTE, ALT_MACRON, XXXXXXX, XXXXXXX, XXXXXXX,  
+        _______,      XXXXXXX, ALT_SEC, ALT_ETH, XXXXXXX, XXXXXXX, XXXXXXX, ALT_LARROW, ALT_DARROW, ALT_UARROW, ALT_RARROW, XXXXXXX,          KC_ENT,
+        MO(ALTCODE2), XXXXXXX, XXXXXXX, ALT_CPR, XXXXXXX, XXXXXXX, ALT_ND,  ALT_MD,  ALT_BUL, ALT_BBL, XXXXXXX,                   MO(ALTCODE2),
+        _______, PIRO_SWITCH,  MO(ALTCODE3),                            _______,           _______,     MO(ALTCODE3), PIRO_SWITCH,       _______),
+    [ALTCODE2] = LAYOUT_ansi_61(
         _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC,   
         _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  
-        _______, XXXXXXX, ALT_SEC, ALT_THR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_ENT,
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, ALT_ND,  ALT_MD,  XXXXXXX, XXXXXXX, XXXXXXX,                   _______,
-        _______, PIRO_SWITCH,  FN_SWITCH,                            _______,           _______,     FN_SWITCH, PIRO_SWITCH,       _______),
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_ENT,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, ALT_BBL, XXXXXXX,                   _______,
+        _______, PIRO_SWITCH,  _______,                            _______,           _______,     _______, PIRO_SWITCH,       _______),
+    [ALTCODE3] = LAYOUT_ansi_61(
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC,   
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_ENT,
+        MO(ALTCODE4), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   MO(ALTCODE4),
+        _______, PIRO_SWITCH,  _______,                            _______,           _______,     _______, PIRO_SWITCH,       _______),
+    [ALTCODE4] = LAYOUT_ansi_61(
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_BSPC,   
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_ENT,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   _______,
+        _______, PIRO_SWITCH,  _______,                            _______,           _______,     _______, PIRO_SWITCH,       _______),
     [FN] = LAYOUT_ansi_61(
         KC_GRV,    KC_F1,      KC_F2,     KC_F3,   KC_F4,   KC_F5,   KC_F6,               KC_F7,      KC_F8,      KC_F9,      KC_F10,      KC_F11,           KC_F12,    KC_DELETE,
         G(KC_TAB), C(KC_PGUP), KC_MPRV,   KC_MPLY, KC_MNXT, _______, S(KC_DELETE),        KC_HOME,    KC_PGDN,    KC_PGUP,    KC_END,      C(KC_HOME),       C(KC_END), _______,
@@ -123,6 +160,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static char lorem_ipsum_string[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n";
     static uint16_t lorem_ipsum_length = sizeof(lorem_ipsum_string)/sizeof(lorem_ipsum_string[0]);
     static char lorem_ipsum_current[] = {'L', '\0'};
+    static uint16_t alt_code_keys[] = {KC_P0, KC_P1, KC_P2, KC_P3, KC_P4, KC_P5, KC_P6, KC_P7, KC_P8, KC_P9};
+
+    void alt_code(int num, ...) {
+        va_list keys;
+        va_start(keys, num);
+        register_code(KC_LALT);
+        for (uint16_t i = 0; i < num; i++) {
+            int current_key_number = va_arg(keys, int);
+            if (current_key_number > 9 || current_key_number < 0) {
+                unregister_code(KC_LALT);
+                return; // If given an invalid input, unregister alt to avoid weird behavior and return to avoid invalid memory access.
+            }
+            register_code(alt_code_keys[current_key_number]);
+            unregister_code(alt_code_keys[current_key_number]);
+        }
+        unregister_code(KC_LALT);
+    }
 
     switch (keycode) {
         case FN_SWITCH:
@@ -306,63 +360,118 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case ALT_MD:
             if (record->event.pressed) {
-                register_code(KC_LALT);
-                register_code(KC_P0);
-                unregister_code(KC_P0);
-                register_code(KC_P1);
-                unregister_code(KC_P1);
-                register_code(KC_P5);
-                unregister_code(KC_P5);
-                register_code(KC_P1);
-                unregister_code(KC_P1);
-                unregister_code(KC_LALT);
+                alt_code(4, 0,1,5,1);
             }
             return false;
 
         case ALT_ND:
             if (record->event.pressed) {
-                register_code(KC_LALT);
-                register_code(KC_P0);
-                unregister_code(KC_P0);
-                register_code(KC_P1);
-                unregister_code(KC_P1);
-                register_code(KC_P5);
-                unregister_code(KC_P5);
-                register_code(KC_P0);
-                unregister_code(KC_P0);
-                unregister_code(KC_LALT);
+                alt_code(4, 0,1,5,0);
             }
             return false;
 
         case ALT_SEC:
             if (record->event.pressed) {
-                register_code(KC_LALT);
-                register_code(KC_P0);
-                unregister_code(KC_P0);
-                register_code(KC_P1);
-                unregister_code(KC_P1);
-                register_code(KC_P6);
-                unregister_code(KC_P6);
-                register_code(KC_P7);
-                unregister_code(KC_P7);
-                unregister_code(KC_LALT);
+                alt_code(4, 0,1,6,7);
             }
             return false;
 
-        case ALT_THR:
+        case ALT_ETH:
             if (record->event.pressed) {
-                register_code(KC_LALT);
-                register_code(KC_P0);
-                unregister_code(KC_P0);
-                register_code(KC_P2);
-                unregister_code(KC_P2);
-                register_code(KC_P4);
-                unregister_code(KC_P4);
-                register_code(KC_P0);
-                unregister_code(KC_P0);
-                unregister_code(KC_LALT);
+                alt_code(4, 0,2,4,0);
             }
             return false;
+
+        case ALT_BUL:
+            if (record->event.pressed) {
+                alt_code(3, 2,4,9);
+            }
+            return false;
+
+        case ALT_BBL:
+            if (record->event.pressed) {
+                alt_code(4, 0,1,4,9);
+            }
+            return false;
+
+        case ALT_CPR:
+            if (record->event.pressed) {
+                alt_code(4, 0,1,6,9);
+            }
+            return false;
+
+        case ALT_TMK:
+            if (record->event.pressed) {
+                alt_code(4, 0,1,5,3);
+            }
+            return false;
+
+        case ALT_RTM:
+            if (record->event.pressed) {
+                alt_code(4, 0,1,7,4);
+            }
+            return false;
+
+        case ALT_LARROW:
+            if (record->event.pressed) {
+                alt_code(2, 2,7);
+            }
+            return false;
+
+        case ALT_UARROW:
+            if (record->event.pressed) {
+                alt_code(2, 2,4);
+            }
+            return false;
+
+        case ALT_RARROW:
+            if (record->event.pressed) {
+                alt_code(2, 2,6);
+            }
+            return false;
+
+        case ALT_DARROW:
+            if (record->event.pressed) {
+                alt_code(2, 2,5);
+            }
+            return false;
+
+        case ALT_LEQ:
+            if (record->event.pressed) {
+                alt_code(3, 2,4,3);
+            }
+            return false;
+
+        case ALT_GEQ:
+            if (record->event.pressed) {
+                alt_code(3, 2,4,2);
+            }
+            return false;
+
+        case ALT_ACUTE:
+            if (record->event.pressed) {
+                alt_code(3, 1,8,0);
+            }
+            return false;
+
+        case ALT_GRAVE:
+            if (record->event.pressed) {
+                alt_code(2, 9,6);
+            }
+            return false;
+
+        case ALT_DIAERESIS:
+            if (record->event.pressed) {
+                alt_code(3, 1,6,8);
+            }
+            return false;
+
+        case ALT_MACRON:
+            if (record->event.pressed) {
+                alt_code(3, 1,7,5);
+            }
+            return false;
+        
     }
 
     if (!record->event.pressed && shift_tap_tracker == 2) { // If shift lock was engaged, release shift when the next key is released
@@ -431,6 +540,30 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (layer_state_is(ACCESS)) {
         for (int i=1; i<61; i++) {
             rgb_matrix_set_color(i, RGB_RED); // Turn all lights red.
+        }
+    }
+
+    if (layer_state_is(ALTCODE)) {
+        for (int i=1; i<61; i++) {
+            rgb_matrix_set_color(i, RGB_GREEN);
+        }
+    }
+
+    if (layer_state_is(ALTCODE2)) {
+        for (int i=1; i<61; i++) {
+            rgb_matrix_set_color(i, RGB_BLUE);
+        }
+    }
+
+    if (layer_state_is(ALTCODE3)) {
+        for (int i=1; i<61; i++) {
+            rgb_matrix_set_color(i, RGB_PURPLE);
+        }
+    }
+
+    if (layer_state_is(ALTCODE4)) {
+        for (int i=1; i<61; i++) {
+            rgb_matrix_set_color(i, RGB_YELLOW);
         }
     }
 
